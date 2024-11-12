@@ -1,0 +1,17 @@
+service: nombre-de-tu-servicio
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-2  # Cambia a la región que prefieras
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http:
+          path: /
+          method: any
+      - http:
+          path: "{proxy+}"
+          method: any
