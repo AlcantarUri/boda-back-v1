@@ -10,6 +10,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors({ origin: 'http://localhost:4200' }));
+app.use(cors({ origin: 'http://192.168.0.21:4200' }));
 
 // Configura Multer para gestionar la carga de archivos
 const upload = multer({ dest: 'uploads/' });
@@ -27,6 +28,8 @@ const drive = google.drive({ version: 'v3', auth });
 
 // Endpoint para subir una foto a Google Drive
 app.post('/upload', upload.single('file'), async (req, res) => {
+  console.log('Subiendo archivo a Google Drive...');
+  
   try {
     const filePath = req.file.path;
     const fileMetadata = {
